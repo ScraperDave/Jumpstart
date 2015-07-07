@@ -1,0 +1,19 @@
+{
+    "name": "genealabs/jumpstart",
+    "autoload": {
+        "psr-4": {
+            "GeneaLabs\\JumpStart\\": "src/"
+        }
+    },
+  "require": {
+    "illuminate/console": "~5.1.0"
+  },
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GeneaLabs\\JumpStart\\Tests\\": "tests/"
+        }
+    }
+}
