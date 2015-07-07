@@ -1,19 +1,29 @@
 {
-    "name": "genealabs/jumpstart",
-    "autoload": {
-        "psr-4": {
-            "GeneaLabs\\JumpStart\\": "src/"
-        }
-    },
+  "name": "genealabs/jumpstart",
+  "description": "Provides the missing views and other functionality to jumpstart your Laravel project.",
+  "keywords": ["laravel","jumpstart","missing"],
+  "homepage": "http://www.github.com/genealabs/jumpstart",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mike Bronner",
+      "email": "mike@genealabs.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GeneaLabs\\JumpStart\\": "src/"
+    }
+  },
   "require": {
     "illuminate/console": "~5.1.0"
   },
-    "require-dev": {
-        "phpunit/phpunit": "4.*"
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "GeneaLabs\\JumpStart\\Tests\\": "tests/"
-        }
+  "require-dev": {
+    "phpunit/phpunit": "4.*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GeneaLabs\\JumpStart\\Tests\\": "tests/"
     }
+  }
 }
