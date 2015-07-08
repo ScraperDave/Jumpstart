@@ -48,6 +48,21 @@ class Jumpstart extends Command
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/auth/login.blade.php', base_path('resources/views/auth/login.blade.php'));
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/auth/register.blade.php', base_path('resources/views/auth/register.blade.php'));
 
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/css/bootstrap-3.3.5.css.map', public_path('css/bootstrap-3.3.5.css.map'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/css/bootstrap-3.3.5.min.css', public_path('css/bootstrap-3.3.5.min.css'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/css/bootstrap-theme.css.map', public_path('css/bootstrap-theme.css.map'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/css/bootstrap-theme.min.css', public_path('css/bootstrap-theme.min.css'));
+
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/js/bootstrap-3.3.5.min.js', public_path('js/bootstrap-3.3.5.min.js'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/js/jquery-2.1.4.min.js', public_path('js/jquery-2.1.4.min.js'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/js/jquery-2.1.4.min.map', public_path('js/jquery-2.1.4.min.map'));
+
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/fonts/glyphicons-halflings-regular.eot', public_path('fonts/glyphicons-halflings-regular.eot'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/fonts/glyphicons-halflings-regular.svg', public_path('fonts/glyphicons-halflings-regular.svg'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/fonts/glyphicons-halflings-regular.ttf', public_path('fonts/glyphicons-halflings-regular.ttf'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/fonts/glyphicons-halflings-regular.woff', public_path('fonts/glyphicons-halflings-regular.woff'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/fonts/glyphicons-halflings-regular.woff2', public_path('fonts/glyphicons-halflings-regular.woff2'));
+
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/routes.php', app_path('Http/routes.php'));
 
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/Controllers/HomeController.php', base_path('app/Http/Controllers/HomeController.php'), $namespace);
@@ -70,6 +85,8 @@ class Jumpstart extends Command
             $newFileName = array_shift($fileNameParts) . '-original-' . Carbon::now('UTC')->format('Y-m-d_h:i:s') . '.' . implode('.', $fileNameParts);
             File::move($targetFile, dirname($targetFile) . '/' . $newFileName);
             $this->info("File '{$fileName}' already exists - renamed to '{$newFileName}'.");
+        } elseif (! File::exists(dirname($targetFile))) {
+            File::makeDirectory(dirname($targetFile), 0755, true, true);
         }
 
         if ($namespace == 'App\\') {

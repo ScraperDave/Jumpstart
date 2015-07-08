@@ -6,10 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap-3.3.5.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,8 +21,8 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle Navigation</span>
@@ -55,8 +57,7 @@
 
 	@yield('content')
 
-	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="{!! asset('js/jquery-2.1.4.min.js') !!}"></script>
+    <script src="{!! asset('js/bootstrap-3.3.5.min.js') !!}"></script>
 </body>
 </html>

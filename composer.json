@@ -12,7 +12,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "GeneaLabs\\JumpStart\\": "src/"
+      "GeneaLabs\\Jumpstart\\": "src/"
     }
   },
   "require": {
