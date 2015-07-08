@@ -3,11 +3,14 @@
 use Carbon\Carbon;
 use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 class Jumpstart extends Command
 {
     use AppNamespaceDetectorTrait;
+
+    private $shouldBackup;
 
     /**
      * The name and signature of the console command.
@@ -41,6 +44,7 @@ class Jumpstart extends Command
     public function handle()
     {
         $namespace = $this->getAppNamespace();
+        $this->shouldBackup = ('n' === strtolower($this->askWithCompletion('Do you want to overwrite files when copying? (Saying \'no\' will create time-stamped copies of the originals.)', ['y', 'n'])));
 
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/app.blade.php', base_path('resources/views/app.blade.php'));
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/home.blade.php', base_path('resources/views/home.blade.php'));
@@ -68,6 +72,12 @@ class Jumpstart extends Command
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/Controllers/HomeController.php', base_path('app/Http/Controllers/HomeController.php'), $namespace);
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/Controllers/WelcomeController.php', base_path('app/Http/Controllers/WelcomeController.php'), $namespace);
 
+        $this->copyJumpstartMigrationAsset(__DIR__ . '/../../assets/database/migrations/_add_name_fields_to_users_table_jumpstart.php', base_path('database/migrations/' . Carbon::now()->format('Y_m_d_His') . '_add_name_fields_to_users_table_jumpstart.php'));
+        $this->copyJumpstartMigrationAsset(__DIR__ . '/../../assets/database/migrations/_add_softdeletes_to_users_table_jumpstart.php', base_path('database/migrations/' . Carbon::now()->format('Y_m_d_His') . '_add_softdeletes_to_users_table_jumpstart.php'));
+
+        if ('y' === strtolower($this->ask('Do you want to run the migrations?', 'y'))) {
+            Artisan::call('migrate');
+        }
 
     }
 
@@ -80,7 +90,7 @@ class Jumpstart extends Command
     {
         $fileName = basename($targetFile);
 
-        if (File::exists($targetFile)) {
+        if ($this->shouldBackup && File::exists($targetFile)) {
             $fileNameParts = explode('.', $fileName);
             $newFileName = array_shift($fileNameParts) . '-original-' . Carbon::now('UTC')->format('Y-m-d_h:i:s') . '.' . implode('.', $fileNameParts);
             File::move($targetFile, dirname($targetFile) . '/' . $newFileName);
@@ -98,5 +108,22 @@ class Jumpstart extends Command
         }
 
         $this->info("File '{$fileName}' copied.");
+    }
+
+    /**
+     * @param string $sourceFile
+     * @param string $targetFile
+     */
+    private function copyJumpstartMigrationAsset($sourceFile, $targetFile)
+    {
+        $existingFileNames = File::files(dirname($targetFile));
+
+        foreach ($existingFileNames as $fileName) {
+            if (strpos($fileName, basename($sourceFile))) {
+                return;
+            }
+        }
+
+        $this->copyJumpstartAsset($sourceFile, $targetFile);
     }
 }
