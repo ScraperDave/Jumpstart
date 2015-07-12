@@ -47,6 +47,14 @@ Add the composer package to `composer.json`:
 }
 ```
 Or install it via the composer command: `composer require genealabs/jumpstart ~0.1.0 --dev`.
+
+Next you need to add the ServiceProvider to `\config\app.php`:
+```php
+//    'providers' => [
+//        ...
+        GeneaLabs\Jumpstart\JumpstartServiceProvider::class,
+//    ]
+```
   
 ## Application
 Running this package will respect your customized namespace, and will make backup copies before applying changes.
