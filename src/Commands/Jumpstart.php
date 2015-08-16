@@ -50,7 +50,9 @@ class Jumpstart extends Command
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/home.blade.php', base_path('resources/views/home.blade.php'));
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/welcome.blade.php', base_path('resources/views/welcome.blade.php'));
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/auth/login.blade.php', base_path('resources/views/auth/login.blade.php'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/auth/password.blade.php', base_path('resources/views/auth/password.blade.php'));
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/auth/register.blade.php', base_path('resources/views/auth/register.blade.php'));
+        $this->copyJumpstartAsset(__DIR__ . '/../../assets/views/auth/reset.blade.php', base_path('resources/views/auth/reset.blade.php'));
 
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/css/bootstrap-3.3.5.css.map', public_path('css/bootstrap-3.3.5.css.map'));
         $this->copyJumpstartAsset(__DIR__ . '/../../assets/css/bootstrap-3.3.5.min.css', public_path('css/bootstrap-3.3.5.min.css'));

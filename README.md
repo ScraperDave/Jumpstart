@@ -12,7 +12,9 @@ The following views are added:
 - /resources/views/home.blade.php
 - /resources/views/welcome.blade.php
 - /resources/views/auth/login.blade.php
+- /resources/views/auth/password.blade.php
 - /resources/views/auth/register.blade.php
+- /resources/views/auth/reset.blade.php
 
 ### jQuery 2.1.4
 jQuery is implemented locally to allow development without an internet connection, as well as supporting the local
